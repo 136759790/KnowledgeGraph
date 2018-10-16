@@ -4,3 +4,7 @@
 > 记录Java的集合框架大体结构。2018-10-15    
 ## [索引](https://github.com/136759790/KnowledgeGraph/blob/master/java/db/%E7%B4%A2%E5%BC%95.md)
 > 记录索引的基础知识
+## git 记住账号密码
+~~~
+git config --global credential.helper store
+~~~
