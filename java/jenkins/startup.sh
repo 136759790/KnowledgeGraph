@@ -1,36 +1,20 @@
-#!/bin/sh
-#功能简介：启动上层目录下的jar文件
-#参数简介：
-#    $1:jar文件名（包含后缀名）
-#    注意：jar文件必须位于startup.sh目录的上一层目录。
+#!/bin/bash
+#source /etc/profile
 
-#启动参数
-JAVA_OPTS="-server -Xms200m -Xmx200m -Xmn200m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=128m -Xverify:none -XX:+DisableExplicitGC -Djava.awt.headless=true"
+nohup java -jar /home/zxt/car/web/admin-server.jar > nohup.out & 2>&1 &
 
-jar_name=$1
-this_dir="$( cd "$( dirname "$0"  )" && pwd )"
-parent_dir=`dirname "${this_dir}"`
-log_dir="${parent_dir}/logs"
-log_file="${log_dir}/catalina.out"
-jar_file="${parent_dir}/${jar_name}"
+#sh tt.sh '/root/yl_cloud/nohup.out'
 
-#参数个数<1或者参数空值时，中断执行
-if [ $# -lt 1 ] || [ -z $1 ]; then
-    echo -e "\033[31m请输入要部署的jar包名称!\033[0m"
-    exit 1
-fi
+echo '完成第一波'
 
-#日志文件夹不存在，则创建
-if [ ! -d "${log_dir}" ]; then
-    mkdir "${log_dir}"
-fi
+nohup java -jar /home/zxt/car/web/admin-server.jar > nohup2.out & 2>&1 &
 
-#父目录下jar文件存在
-if [ -f "${jar_file}" ]; then
-    #启动jar包；重定向标准错误输出到文件，丢掉标准输出
-    java $JAVA_OPTS -jar ${jar_file} 1>/dev/null 2>"${log_file}" &
-    exit 0
-else
-    echo -e "\033[31m${jar_file}文件不存在！\033[0m"
-    exit 1
-fi
+#sh tt.sh '/root/yl_cloud/nohup2.out'
+
+echo '完成第二波'
+
+nohup java -jar /home/zxt/car/web/admin-server.jar > nohup3.out & 2>&1 &
+
+#sh tt.sh '/root/yl_cloud/nohup3.out'
+
+echo '完成第三波'
